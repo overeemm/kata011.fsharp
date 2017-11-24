@@ -21,6 +21,10 @@ let ``with multiple numbers should return addition`` () =
   21 |>  should equal (add "1,2,3,4,5,6")
 
 [<Test>]
+let ``with multiple seperators should throw`` () =
+  (fun () -> add "1,2,,6" |> ignore) |> should throw typeof<System.Exception>
+
+[<Test>]
 let ``with multiple numbers and newlines should return addition`` () =
   21 |>  should equal (add @"1
 2

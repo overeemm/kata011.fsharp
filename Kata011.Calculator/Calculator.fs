@@ -7,4 +7,17 @@ let add =
                                 | (true,int) -> int
                                 | _          -> 0
 
-  split [|',';'\n'|] >> Array.fold (fun acc x -> acc + parse x) 0
+  let failOnEmpty text = match text with
+                            | "" -> failwith ("Invalid input")
+                            | _  -> text
+
+  let map = Array.map
+  let fold = Array.fold
+
+  let failOnNonEmptyListWithEmptyValues (array : string[]) : string[] = 
+                         match array.Length with
+                            | 0  -> array
+                            | 1  -> array
+                            | _  -> map failOnEmpty array
+
+  split [|',';'\n'|] >> failOnNonEmptyListWithEmptyValues >> map parse >> fold (+) 0
