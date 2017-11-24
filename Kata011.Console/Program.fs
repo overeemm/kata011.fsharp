@@ -1,7 +1,11 @@
-﻿// Learn more about F# at http://fsharp.org
+﻿open CalculatorFunctions
+
+// Learn more about F# at http://fsharp.org
 // See the 'F# Tutorial' project for more help.
 
 [<EntryPoint>]
-let main argv = 
-    printfn "%A" argv
-    0 // return an integer exit code
+let main (argv : string[])= 
+    match argv with 
+      | [|first|] -> add first |> printfn "%A"
+      | _         -> failwith "Must have only one argument."
+    0
