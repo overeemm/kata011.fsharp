@@ -7,4 +7,4 @@ let add =
                                 | (true,int) -> int
                                 | _          -> 0
 
-  split [|','|] >> Array.fold (fun acc x -> acc + parse x) 0
+  split [|',';'\n'|] >> Array.fold (fun acc x -> acc + parse x) 0
